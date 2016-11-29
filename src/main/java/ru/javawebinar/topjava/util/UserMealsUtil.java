@@ -51,6 +51,11 @@ public class UserMealsUtil {
         }
         return list;*/
 
+        /*Map<LocalDate, Integer> caloriesByDays = mealList.stream()     // вариант получения Map<LocalDate,Integer> из mealList
+                                .collect(Collectors.groupingBy(userMeal -> userMeal.getDateTime().toLocalDate(),
+                                        Collectors.summingInt(UserMeal::getCalories))
+                                );*/
+
         Map<LocalDate,Integer> sortedByDate2
         = mealList.stream()
                 .collect(Collectors.toMap(( (p) -> p.getDateTime().toLocalDate() ),(UserMeal::getCalories),(x, y) -> x+y));
