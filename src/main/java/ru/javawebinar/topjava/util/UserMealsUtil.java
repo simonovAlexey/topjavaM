@@ -33,13 +33,13 @@ public class UserMealsUtil {
     public static List<UserMealWithExceed>  getFilteredWithExceeded(List<UserMeal> mealList,
                                                                     LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
 
-       /*List<UserMealWithExceed> list = new ArrayList<>();
+       List<UserMealWithExceed> list = new ArrayList<>();
          Map<LocalDate,Integer> sortedByDate = new HashMap<>();
          for (UserMeal meal:mealList) {                              //решение через циклы
             LocalDate currD = meal.getDateTime().toLocalDate();
-            Integer orDefault = sortedByDate.getOrDefault(currD, 0);
-            sortedByDate.put(currD, orDefault + meal.getCalories());
+            sortedByDate.merge(currD,meal.getCalories(),(calOld,calN)-> calOld+calN);
         }
+
 
         for (UserMeal meal:mealList) {
             LocalDateTime currDT = meal.getDateTime();
@@ -49,7 +49,7 @@ public class UserMealsUtil {
                     list.add(new UserMealWithExceed(currDT, meal.getDescription(), meal.getCalories(), currExceed));
             }
         }
-        return list;*/
+//        return list;
 
         /*Map<LocalDate, Integer> caloriesByDays = mealList.stream()     // вариант получения Map<LocalDate,Integer> из mealList
                                 .collect(Collectors.groupingBy(userMeal -> userMeal.getDateTime().toLocalDate(),
