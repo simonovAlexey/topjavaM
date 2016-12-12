@@ -29,12 +29,12 @@
         </c:if>
         <tr>
             <td>
-                Date (yyyy.MM.dd-kk:mm):
+                Date (HTML5):
             </td>
             <td>
                 <c:if test="${!empty meal.dateTime}">
                     <%--<input type="datetime-local" name="date" value=${f:formatLocalDateTime(meal.dateTime, 'yyyy.MM.dd-kk:mm')}>--%>
-                    <input type="datetime-local" name="date" value=${meal.dateTime}>
+                    <input type="datetime-local" name="date" value=${meal.dateTime} >
                 </c:if>
                 <c:if test="${empty meal.dateTime}">
                     <input type="datetime-local" name="date" value="<%=LocalDateTime.now() %>">
@@ -50,7 +50,7 @@
             <td>
                 <input
                         type="text" name="desc"
-                        value="<c:out value="${meal.description}"/>"/>
+                        value="<c:out value="${meal.description}">перекус</c:out>"/>
             </td>
 
         </tr>
@@ -61,7 +61,7 @@
             <td>
                 <input
                         type="number" name="calories"
-                        value="<c:out value="${meal.calories}"/>"/>
+                        value="<c:out value="${meal.calories}">333</c:out>"/>
             </td>
 
         </tr>

@@ -4,10 +4,14 @@
 <html>
 <head>
     <title>Meals</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<style>
+<%--<style>
     table {
-        font-family: arial, sans-serif;
         border-collapse: collapse;
         width: 620px;
     }
@@ -18,16 +22,17 @@
         padding: 8px;
 
     }
-</style>
+</style>--%>
 <body>
+<div class="container">
 <h3><a href="index.html">Home</a></h3>
 <h2>Meal list</h2>
 <br>
-<table >
+<table class="table table-striped" width="620px">
     <tr>
         <th>Id</th>
-        <th width = "30%">Время</th>
-        <th width = "40%">Описание</th>
+        <th width = "20%">Время</th>
+        <th width = "50%">Описание</th>
         <th>Калории</th>
         <th>Обновить</th>
         <th>Удалить</th>
@@ -46,6 +51,7 @@
 
 
 </table>
-<p><a href="meals?action=insert">Add User</a></p>
+<p><a href="meals?action=insert" class="btn btn-info" role="button">Add User</a></p>
+</div>
 </body>
 </html>
