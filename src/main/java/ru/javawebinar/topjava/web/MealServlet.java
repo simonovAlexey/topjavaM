@@ -37,10 +37,10 @@ public class MealServlet extends HttpServlet {
         String idString = request.getParameter("mealId");
 
         int calories = Integer.parseInt(request.getParameter("calories"));
-        String desc = request.getParameter("desc");
+        String description = request.getParameter("desc");
         String date = request.getParameter("date");
         LocalDateTime dateTime = LocalDateTime.parse(date);
-        Meal meal = new Meal(dateTime, desc, calories);
+        Meal meal = new Meal(dateTime, description, calories);
 
         if (idString == null || idString.isEmpty()) {
             dao.create(meal);
@@ -63,9 +63,9 @@ public class MealServlet extends HttpServlet {
         if (action.equalsIgnoreCase("delete")) {
             int mealId = Integer.parseInt(request.getParameter("mealId"));
             dao.delete(mealId);
-            forward = LIST_MEAL;
-            List<MealWithExceed> mw = dao.getAll(LocalTime.of(0, 0), LocalTime.of(23, 59), 2000);
-            request.setAttribute("list", mw);
+            response.sendRedirect("meals?action=list"); //redirect на таблицу meals
+            return;
+
         } else if (action.equalsIgnoreCase("edit")) {
             forward = INSERT_OR_EDIT;
             int mealId = Integer.parseInt(request.getParameter("mealId"));
@@ -78,11 +78,8 @@ public class MealServlet extends HttpServlet {
             forward = INSERT_OR_EDIT;
         }
 
-        RequestDispatcher view = request.getRequestDispatcher(forward);
-        view.forward(request, response);
+        request.getRequestDispatcher(forward).forward(request, response);
 
 
-//        request.setAttribute("list",dao.getAll(LocalTime.of(7, 0), LocalTime.of(21, 0), 2000));
-//        request.getRequestDispatcher("/meals.jsp").forward(request, response);
     }
 }
