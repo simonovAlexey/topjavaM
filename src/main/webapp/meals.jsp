@@ -13,6 +13,22 @@
         .exceeded {
             color: red;
         }
+        dl {
+            margin: 8px 0;
+            padding: 0;
+        }
+
+        dt {
+            display: inline-block;
+            width: 100px;
+
+        }
+
+        dd {
+            display: inline-block;
+            margin-left: 8px;
+            vertical-align: top;
+        }
     </style>
 </head>
 <body>
@@ -20,6 +36,22 @@
     <h2><a href="index.html">Home</a></h2>
     <h2>Meal list</h2>
     <a href="meals?action=create">Add Meal</a>
+    <hr>
+    <form method="get" action="meals">
+        <dl>
+            <dt>FromDate:</dt>
+            <dd><input type="date" value="${fromDate}" name="fromDate"></dd>
+            <dt>ToDate:</dt>
+            <dd><input type="date" value="${toDate}" name="toDate"></dd>
+        </dl>
+        <dl>
+            <dt>FromTime:</dt>
+            <dd><input type="time" value="${fromTime}" name="fromTime"></dd>
+            <dt>ToTime:</dt>
+            <dd><input type="time" value="${toTime}" name="toTime"></dd>
+        </dl>
+        <button type="submit">Sort</button>
+    </form>
     <hr>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
