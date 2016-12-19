@@ -56,7 +56,6 @@ public class MealServlet extends HttpServlet {
                 Integer.valueOf(request.getParameter("calories")));
 
         LOG.info(meal.isNew() ? "Create {}" : "Update {}", meal);
-//        repository.save(meal);
         mealController.save(meal);
         response.sendRedirect("meals");
     }
@@ -77,32 +76,31 @@ public class MealServlet extends HttpServlet {
             String toDate = request.getParameter("toDate");
             String fromTime = request.getParameter("fromTime");
             String toTime = request.getParameter("toTime");
-            Cookie[] cookies = request.getCookies();
-            for (Cookie cookie : cookies) {
+//            Cookie[] cookies = request.getCookies();
+//            for (Cookie cookie : cookies) {
 //                if (cookie.getName().equals("fromDate") ) fromDate = cookie.getValue();
 //                if (cookie.getName().equals("toDate") ) toDate = cookie.getValue();
 //                if (cookie.getName().equals("fromTime") ) fromTime = cookie.getValue();
 //                if (cookie.getName().equals("toTime") ) toTime = cookie.getValue();
-                cookie.setMaxAge(0);
-            }
-            String fromDate1 = (String) request.getAttribute("fromDate");
+//                cookie.setMaxAge(0);
+//            }
+//            String fromDate1 = (String) request.getAttribute("fromDate");
 
 //            response.addCookie(new Cookie("fromDate",fromDate));
 //            response.addCookie(new Cookie("toDate",toDate));
 //            response.addCookie(new Cookie("fromTime",fromTime));
 //            response.addCookie(new Cookie("toTime",toTime));
 
-//            request.setAttribute("fromDate",fromDate);
 
             LOG.info("getAll betwenDate:" + fromDate + " : " + toDate + " betwenTime:" + fromTime + " : " + toTime);
             LocalDate fD = (fromDate == null || fromDate == "") ? LocalDate.MIN : LocalDate.parse(fromDate);
             LocalDate tD = (toDate == null || toDate == "") ? LocalDate.MAX : LocalDate.parse(toDate);
             LocalTime fT = (fromTime == null || fromTime == "") ? LocalTime.MIN : LocalTime.parse(fromTime);
             LocalTime tT = (toTime == null || toTime == "") ? LocalTime.MAX : LocalTime.parse(toTime);
+
             request.setAttribute("meals",
                     mealController.getFiltred(AuthorizedUser.id(), AuthorizedUser.getCaloriesPerDay(),
                             fD, tD, fT, tT));
-//                    mealController.getWithExceeded(mealController.getAll(AuthorizedUser.id()), AuthorizedUser.getCaloriesPerDay()));
             request.setAttribute("fromDate", fromDate);
             request.setAttribute("fromTime", fromTime);
             request.setAttribute("toDate", toDate);
@@ -112,14 +110,12 @@ public class MealServlet extends HttpServlet {
         } else if ("delete".equals(action)) {
             int id = getId(request);
             LOG.info("Delete {}", id);
-//            repository.delete(id);
             mealController.delete(id);
             response.sendRedirect("meals");
 
         } else if ("create".equals(action) || "update".equals(action)) {
             final Meal meal = action.equals("create") ?
                     new Meal(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES), "", 1000) :
-//                    repository.get(getId(request));
                     mealController.get(getId(request));
             request.setAttribute("meal", meal);
             request.getRequestDispatcher("meal.jsp").forward(request, response);
