@@ -28,6 +28,9 @@ public class Meal extends BaseEntity {
 
     public Meal() {
     }
+    public Meal(Meal nMeal) {
+        new Meal(nMeal.getDateTime(),nMeal.getDescription(),nMeal.getCalories());
+    }
 
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
