@@ -17,9 +17,4 @@ public class MealTestData {
     public static final Meal MEAL2 = new Meal(LocalDateTime.of(2016, Month.DECEMBER, 26, 8, 0), "Завтрак тестовый2", 500);
 
     public static final ModelMatcher<Meal> M_MATCHER = new ModelMatcher<>( );
-//            (e, a) -> e == a || (Objects.equals(e.getId(), a.getId()) &&
-//            Objects.equals(e.getDescription(),a.getDescription()
-//
-//            )));
-
 }

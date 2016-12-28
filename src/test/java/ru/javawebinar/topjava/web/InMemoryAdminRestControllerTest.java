@@ -19,14 +19,13 @@ import static ru.javawebinar.topjava.UserTestData.USER;
 public class InMemoryAdminRestControllerTest {
     private static ConfigurableApplicationContext appCtx;
     private static AdminRestController controller;
-    private static DbPopulator dbPopulator;
 
     @BeforeClass
     public static void beforeClass() {
-        appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml","spring/spring-db.xml");
+        appCtx = new ClassPathXmlApplicationContext("spring-test.xml");
         System.out.println("\n" + Arrays.toString(appCtx.getBeanDefinitionNames()) + "\n");
         controller = appCtx.getBean(AdminRestController.class);
-        dbPopulator = appCtx.getBean(DbPopulator.class);
+
     }
 
     @AfterClass
@@ -39,9 +38,8 @@ public class InMemoryAdminRestControllerTest {
         // Re-initialize
         UserRepository repository = appCtx.getBean(UserRepository.class);
         repository.getAll().forEach(u -> repository.delete(u.getId()));
-//        repository.save(USER);
-//        repository.save(ADMIN);
-        dbPopulator.execute();
+        repository.save(USER);
+        repository.save(ADMIN);
     }
 
     @Test
