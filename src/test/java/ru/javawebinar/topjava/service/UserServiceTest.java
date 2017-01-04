@@ -1,6 +1,8 @@
 package ru.javawebinar.topjava.service;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -26,6 +28,9 @@ import static ru.javawebinar.topjava.UserTestData.*;
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
 public class UserServiceTest {
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     @Autowired
     private UserService service;
 
@@ -37,8 +42,9 @@ public class UserServiceTest {
         MATCHER.assertCollectionEquals(Arrays.asList(ADMIN, newUser, USER), service.getAll());
     }
 
-    @Test(expected = DataAccessException.class)
+    @Test
     public void testDuplicateMailSave() throws Exception {
+        thrown.expect(DataAccessException.class);
         service.save(new User(null, "Duplicate", "user@yandex.ru", "newPass", Role.ROLE_USER));
     }
 
@@ -48,8 +54,9 @@ public class UserServiceTest {
         MATCHER.assertCollectionEquals(Collections.singletonList(ADMIN), service.getAll());
     }
 
-    @Test(expected = NotFoundException.class)
-    public void testNotFoundDelete() throws Exception {
+    @Test
+    public void testNotFoundDelete() {
+        thrown.expect(NotFoundException.class);
         service.delete(1);
     }
 
@@ -59,8 +66,9 @@ public class UserServiceTest {
         MATCHER.assertEquals(USER, user);
     }
 
-    @Test(expected = NotFoundException.class)
-    public void testGetNotFound() throws Exception {
+    @Test
+    public void testGetNotFound() {
+        thrown.expect(NotFoundException.class);
         service.get(1);
     }
 
