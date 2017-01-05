@@ -1,9 +1,10 @@
 package ru.javawebinar.topjava.service;
 
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.rules.ExpectedException;
+import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
@@ -18,6 +19,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
+import static org.slf4j.LoggerFactory.getLogger;
 import static ru.javawebinar.topjava.UserTestData.*;
 
 @ContextConfiguration({
@@ -33,6 +35,32 @@ public class UserServiceTest {
 
     @Autowired
     private UserService service;
+
+    @Rule
+    public TestName name = new TestName();
+
+    private static Logger LOG = getLogger(UserServiceTest.class);
+    private static Long allTime = 0L;
+    private static Long startTime;
+
+
+    @AfterClass
+    public static void afterClasses() {
+        LOG.info("Result time of all test: " + allTime + "ms");
+    }
+
+
+    @Before
+    public void before() {
+        startTime = System.currentTimeMillis();
+    }
+
+    @After
+    public void after() {
+        long endTestTime = System.currentTimeMillis() - startTime;
+        allTime += endTestTime;
+        LOG.info("Executed method: " + name.getMethodName() + ", in " + endTestTime + " ms");
+    }
 
     @Test
     public void testSave() throws Exception {
