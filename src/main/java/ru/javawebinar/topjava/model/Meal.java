@@ -19,7 +19,8 @@ import java.time.LocalTime;
         @NamedQuery(name = Meal.M_ALL, query = "SELECT m FROM Meal m WHERE m.user.id=:userId ORDER BY m.dateTime DESC"),
 })
 @Entity
-@Table(name = "meals")
+@Table(name = "meals",
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id","date_time"})})
 public class Meal extends BaseEntity {
 
     public static final String M_DELETE = "Meal.delete";
