@@ -4,6 +4,7 @@
 <%@ taglib prefix="fn" uri="http://topjava.javawebinar.ru/functions" %>
 <html>
 <head>
+    <% System.setProperty("spring.profiles.active", "hsqldb, datajpa");%>
     <title>Meal list</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
