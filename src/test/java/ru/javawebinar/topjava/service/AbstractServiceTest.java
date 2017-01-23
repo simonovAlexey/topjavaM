@@ -9,6 +9,8 @@ import org.junit.runner.Description;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
@@ -33,6 +35,9 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 abstract public class AbstractServiceTest {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractServiceTest.class);
 
+    @Autowired
+    public Environment environment;
+
     private static StringBuilder results = new StringBuilder();
 
     @Rule
@@ -48,6 +53,8 @@ abstract public class AbstractServiceTest {
             LOG.info(result + " ms\n");
         }
     };
+
+
 
     @AfterClass
     public static void printResult() {
