@@ -1,17 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html>
-<head>
-    <title>Meal</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
+<jsp:include page="fragments/headTag.jsp"/>
 <body>
+<jsp:include page="fragments/bodyHeader.jsp"/>
 <section>
-    <h2><a href="index.html">Home</a></h2>
-    <h2>${param.action == 'create' ? 'Create meal' : 'Edit meal'}</h2>
-    <hr>
     <jsp:useBean id="meal" type="ru.javawebinar.topjava.model.Meal" scope="request"/>
+
+    <h2>${meal.id == null ? 'Create meal' : 'Edit meal'}</h2>
+    <hr>
     <form method="post" action="meals">
         <input type="hidden" name="id" value="${meal.id}">
         <dl>
@@ -30,5 +29,6 @@
         <button onclick="window.history.back()">Cancel</button>
     </form>
 </section>
+<jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>

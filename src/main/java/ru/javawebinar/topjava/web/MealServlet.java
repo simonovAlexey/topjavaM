@@ -41,7 +41,7 @@ public class MealServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
         if (action == null) {
-            final Meal meal = new Meal(
+            /*final Meal meal = new Meal(
                     LocalDateTime.parse(request.getParameter("dateTime")),
                     request.getParameter("description"),
                     Integer.valueOf(request.getParameter("calories")));
@@ -54,7 +54,7 @@ public class MealServlet extends HttpServlet {
                 mealController.update(meal, getId(request));
             }
             response.sendRedirect("meals");
-
+*/
         } else if ("filter".equals(action)) {
             LocalDate startDate = DateTimeUtil.parseLocalDate(request.getParameter("startDate"));
             LocalDate endDate = DateTimeUtil.parseLocalDate(request.getParameter("endDate"));
