@@ -19,6 +19,7 @@ import java.util.Set;
 @NamedQueries({
         @NamedQuery(name = User.DELETE, query = "DELETE FROM User u WHERE u.id=:id"),
         @NamedQuery(name = User.BY_EMAIL, query = "SELECT u FROM User u LEFT JOIN FETCH u.roles WHERE u.email=?1"),
+        @NamedQuery(name = User.GET, query = "SELECT u FROM User u LEFT JOIN FETCH u.roles WHERE u.id=?1"),
         @NamedQuery(name = User.ALL_SORTED, query = "SELECT u FROM User u LEFT JOIN FETCH u.roles ORDER BY u.name, u.email"),
 })
 @Entity
@@ -27,6 +28,7 @@ public class User extends NamedEntity {
 
     public static final String DELETE = "User.delete";
     public static final String ALL_SORTED = "User.getAllSorted";
+    public static final String GET = "User.get";
     public static final String BY_EMAIL = "User.getByEmail";
 
     @Column(name = "email", nullable = false, unique = true)
@@ -125,6 +127,10 @@ public class User extends NamedEntity {
 
     public List<Meal> getMeals() {
         return meals;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     @Override

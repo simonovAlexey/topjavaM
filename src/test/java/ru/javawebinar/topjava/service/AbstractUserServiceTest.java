@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.service;
 
+import org.junit.Assert;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +16,7 @@ import javax.validation.ConstraintViolationException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 
 import static ru.javawebinar.topjava.UserTestData.*;
 
@@ -23,7 +25,7 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
     @Autowired
     protected UserService service;
 
-    @Autowired(required=false)
+    @Autowired(required = false)
     protected JpaUtil jpaUtil;
 
     @Before
@@ -51,6 +53,12 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
         MATCHER.assertCollectionEquals(Collections.singletonList(ADMIN), service.getAll());
     }
 
+    @Test
+    public void testRoles() throws Exception {
+        Set<Role> set = service.get(ADMIN_ID).getRoles();
+        Assert.assertEquals(ADMIN_ROLES, set);
+    }
+
     @Test(expected = NotFoundException.class)
     public void testNotFoundDelete() throws Exception {
         service.delete(1);
@@ -58,8 +66,10 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
 
     @Test
     public void testGet() throws Exception {
-        User user = service.get(USER_ID);
-        MATCHER.assertEquals(USER, user);
+//        User user = service.get(USER_ID);
+        User uad = service.get(ADMIN_ID);
+//        MATCHER.assertEquals(USER, user);
+        MATCHER.assertEquals(ADMIN, uad);
     }
 
     @Test(expected = NotFoundException.class)

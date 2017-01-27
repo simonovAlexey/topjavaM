@@ -59,16 +59,13 @@ public class RootController extends MealRestController {
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String deleteUser(HttpServletRequest request) {
-        int id = Integer.valueOf(request.getParameter("id"));
-        delete(id);
+        delete(getId(request));
         return "redirect:meals";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     public String updateUser(HttpServletRequest request, Model model) {
-        int id = Integer.valueOf(request.getParameter("id"));
-        Meal meal = get(id);
-        model.addAttribute("meal", meal);
+        model.addAttribute("meal", get(getId(request)));
         return "meal";
     }
 
