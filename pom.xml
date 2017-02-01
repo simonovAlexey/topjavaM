@@ -197,6 +197,7 @@
             <version>${hibernate-validator.version}</version>
         </dependency>
 
+        <!--http://hibernate.org/validator/documentation/getting-started/#unified-expression-language-el-->
         <dependency>
             <groupId>javax.el</groupId>
             <artifactId>javax.el-api</artifactId>
@@ -272,7 +273,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!--http://hibernate.org/validator/documentation/getting-started/#unified-expression-language-el-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
