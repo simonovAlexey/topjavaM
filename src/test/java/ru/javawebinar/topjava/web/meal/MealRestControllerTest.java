@@ -100,7 +100,8 @@ public class MealRestControllerTest extends AbstractControllerTest {
     public void testGetBetween() throws Exception {
 
         String format = String.format("filter/sd%s/ed%s/st%s/et%s",
-                of(2015, Month.MAY, 30).toString(),
+//                LocalDateTime.of(2015, Month.MAY, 30,00,0).toString(),
+                "2015-05-30 00:00",
                 of(2015, Month.MAY, 30).toString(),
                 LocalTime.of(0, 0, 0).toString(),
                 LocalTime.of(23, 59, 59).toString());

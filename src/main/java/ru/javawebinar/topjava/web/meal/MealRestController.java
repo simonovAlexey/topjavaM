@@ -7,11 +7,15 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.to.MealWithExceed;
+import ru.javawebinar.topjava.util.DateFormatter;
 
 import java.net.URI;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+
+import static org.springframework.format.annotation.DateTimeFormat.ISO;
 
 /**
  * GKislin
@@ -57,12 +61,13 @@ public class MealRestController extends AbstractMealController {
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
-    @Override
+
     @GetMapping(value = "filter/sd{startDate}/ed{endDate}/st{startTime}/et{endTime}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<MealWithExceed> getBetween(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-                                           @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime startTime,
-                                           @PathVariable ("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
-                                           @PathVariable ("endTime") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime endTime) {
+    public @ResponseBody List<MealWithExceed> getBetweenD(@PathVariable("startDate")  @DateFormatter LocalDateTime temp,
+                                           @PathVariable("startTime") @DateTimeFormat(iso = ISO.TIME) LocalTime startTime,
+                                           @PathVariable ("endDate") @DateTimeFormat(iso = ISO.DATE) LocalDate endDate,
+                                           @PathVariable ("endTime") @DateTimeFormat(iso = ISO.TIME) LocalTime endTime) {
+        LocalDate startDate = temp.toLocalDate();
         return super.getBetween(startDate, startTime, endDate, endTime);
     }
 }
