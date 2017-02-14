@@ -41,6 +41,7 @@ function updateTableByData(data) {
 }
 
 function save() {
+
     $.ajax({
         type: "POST",
         url: ajaxUrl,

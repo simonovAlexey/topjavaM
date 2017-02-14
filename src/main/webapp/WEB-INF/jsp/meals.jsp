@@ -76,12 +76,12 @@
                         <th></th>
                     </tr>
                     </thead>
-                    <c:forEach items="${meals}" var="meal">
+                    <%--<c:forEach items="${meals}" var="meal">
                         <jsp:useBean id="meal" scope="page" type="ru.javawebinar.topjava.to.MealWithExceed"/>
                         <tr class="${meal.exceed ? 'exceeded' : 'normal'}">
                             <td>
-                                    <%--<fmt:parseDate value="${meal.dateTime}" pattern="y-M-dd'T'H:m" var="parsedDate"/>--%>
-                                    <%--<fmt:formatDate value="${parsedDate}" pattern="yyyy.MM.dd HH:mm" />--%>
+                                    &lt;%&ndash;<fmt:parseDate value="${meal.dateTime}" pattern="y-M-dd'T'H:m" var="parsedDate"/>&ndash;%&gt;
+                                    &lt;%&ndash;<fmt:formatDate value="${parsedDate}" pattern="yyyy.MM.dd HH:mm" />&ndash;%&gt;
                                     ${fn:formatDateTime(meal.dateTime)}
                             </td>
                             <td>${meal.description}</td>
@@ -93,7 +93,7 @@
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                             </a></td>
                         </tr>
-                    </c:forEach>
+                    </c:forEach>--%>
                 </table>
             </div>
         </div>
@@ -110,7 +110,7 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="detailsForm">
-                    <input type="hidden" id="id" name="id">
+                    <input type="text" hidden="hidden" id="id" name="id">
 
                     <div class="form-group">
                         <label for="dateTime" class="control-label col-xs-3"><spring:message
@@ -118,7 +118,7 @@
 
                         <div class="col-xs-9">
                             <input type="datetime-local" class="form-control" id="dateTime" name="dateTime"
-                                   placeholder="<spring:message code="meals.dateTime"/>">
+                                   placeholder="<spring:message code="meals.dateTime"/> ">
                         </div>
                     </div>
                     <div class="form-group">
@@ -135,7 +135,7 @@
                                 code="meals.calories"/></label>
 
                         <div class="col-xs-9">
-                            <input type="number" class="form-control" id="calories" name="calories" placeholder="1000">
+                            <input type="number" class="form-control" id="calories" name="calories" value="1000" min="10" max="5000">
                         </div>
                     </div>
                     <div class="form-group">
@@ -151,4 +151,12 @@
     </div>
 </div>
 </body>
+<script type="text/javascript">
+    var i18n = [];
+
+    var editTitle ='<spring:message code="users.edit"/>';
+    <c:forEach var='key' items='<%=new String[]{"common.deleted","common.saved","common.enabled","common.disabled","common.failed"}%>'>
+    i18n['${key}'] = '<spring:message code="${key}"/>';
+    </c:forEach>
+</script>
 </html>
