@@ -11,6 +11,7 @@ import ru.javawebinar.topjava.util.exception.ErrorInfo;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ValidationException;
 
 /**
  * User: gkislin
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 public class ExceptionInfoHandler {
     Logger LOG = LoggerFactory.getLogger(ExceptionInfoHandler.class);
 
-//  http://stackoverflow.com/a/22358422/548473
+    //  http://stackoverflow.com/a/22358422/548473
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
     @ExceptionHandler(NotFoundException.class)
     @ResponseBody
@@ -29,10 +30,18 @@ public class ExceptionInfoHandler {
         return logAndGetErrorInfo(req, e, false);
     }
 
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ValidationException.class)
+    @ResponseBody
+    @Order(Ordered.HIGHEST_PRECEDENCE + 1)
+    public ErrorInfo validationError(HttpServletRequest req, ValidationException e) {
+        return logAndGetErrorInfo(req, e, false);
+    }
+
     @ResponseStatus(value = HttpStatus.CONFLICT)  // 409
     @ExceptionHandler(DataIntegrityViolationException.class)
     @ResponseBody
-    @Order(Ordered.HIGHEST_PRECEDENCE + 1)
+    @Order(Ordered.HIGHEST_PRECEDENCE + 2)
     public ErrorInfo conflict(HttpServletRequest req, DataIntegrityViolationException e) {
         return logAndGetErrorInfo(req, e, true);
     }
