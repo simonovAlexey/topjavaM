@@ -83,6 +83,32 @@ public class MealRestControllerTest extends AbstractControllerTest {
 
         assertEquals(updated, service.get(MEAL1_ID, START_SEQ));
     }
+    @Test
+    public void testUpdateValidation() throws Exception {
+        Meal updated = getUpdated();
+        updated.setDescription("");
+        updated.setCalories(5555);
+
+        mockMvc.perform(put(REST_URL + MEAL1_ID)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(updated))
+                .with(userHttpBasic(USER)))
+                .andExpect(status().isBadRequest());
+
+    }
+    @Test
+    public void testCreateValidation() throws Exception {
+        Meal created = getUpdated();
+        created.setDescription("");
+        created.setCalories(5555);
+
+        ResultActions action = mockMvc.perform(post(REST_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(created))
+                .with(userHttpBasic(ADMIN)))
+                .andExpect(status().isBadRequest());
+
+    }
 
     @Test
     public void testCreate() throws Exception {
