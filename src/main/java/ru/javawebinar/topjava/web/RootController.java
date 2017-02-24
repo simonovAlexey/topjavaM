@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,6 +21,14 @@ import javax.validation.Valid;
  */
 @Controller
 public class RootController extends AbstractUserController {
+
+    @Autowired
+    EmailValidator emailValidator;
+
+    /*@InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        binder.setValidator(emailValidator);
+    }*/
 
     @GetMapping("/")
     public String root() {
@@ -69,6 +78,7 @@ public class RootController extends AbstractUserController {
 
     @PostMapping("/register")
     public String saveRegister(@Valid UserTo userTo, BindingResult result, SessionStatus status, ModelMap model) {
+        emailValidator.validate(userTo,result);
         if (result.hasErrors()) {
             model.addAttribute("register", true);
             return "profile";

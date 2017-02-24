@@ -19,6 +19,19 @@ import javax.servlet.http.HttpServletRequest;
 public class GlobalControllerExceptionHandler {
     private static final Logger LOG = LoggerFactory.getLogger(GlobalControllerExceptionHandler.class);
 
+//    @ResponseStatus(value = HttpStatus.CONFLICT)  // 409
+   /* @ExceptionHandler(DataIntegrityViolationException.class)
+    @Order(Ordered.HIGHEST_PRECEDENCE)
+    public ModelAndView conflictU(HttpServletRequest req, DataIntegrityViolationException e) {
+        LOG.error("Exception at request " + req.getRequestURL(), e);
+        ModelAndView mav = new ModelAndView("profile");
+        mav.addObject("exception", e);
+        mav.addAllObjects(req.getParameterMap());
+        mav.getModel().remove("_csrf");
+
+        return mav;
+    }
+*/
     @ExceptionHandler(Exception.class)
     @Order(Ordered.LOWEST_PRECEDENCE)
     ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
