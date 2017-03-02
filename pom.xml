@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ru.javawebinar</groupId>
-    <artifactId>topjava</artifactId>
+    <artifactId>topjavaM</artifactId>
     <packaging>war</packaging>
 
     <version>1.0-SNAPSHOT</version>
@@ -48,7 +48,7 @@
     </properties>
 
     <build>
-        <finalName>topjava</finalName>
+        <finalName>topjavaM</finalName>
         <defaultGoal>package</defaultGoal>
         <plugins>
             <plugin>
@@ -100,7 +100,7 @@
                     <deployables>
                         <deployable>
                             <groupId>ru.javawebinar</groupId>
-                            <artifactId>topjava</artifactId>
+                            <artifactId>topjavaM</artifactId>
                             <type>war</type>
                             <properties>
                                 <context>${project.build.finalName}</context>
