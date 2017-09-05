@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/JavaWebinar/topjava09.svg?branch=master)](https://travis-ci.org/JavaWebinar/topjava09)
 [![Dependency Status](https://dependencyci.com/github/JavaWebinar/topjava09/badge)](https://dependencyci.com/github/JavaWebinar/topjava09)
 
-JavaOps 
+
 ===============================
 
 Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery + plugins.
