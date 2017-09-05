@@ -84,14 +84,14 @@
         профилем и данными (день, еда, калории) через UI (по AJAX) и по REST интерфейсу с базовой авторизацией.
         Возможна фильтрация данных по датам и времени, при этом цвет записи таблицы еды зависит от того, превышает ли
         сумма
-        калорий за день норму (редактируемый параметр в профиле пользователя).</br>
+        калорий за день норму (редактируемый параметр в профиле пользователя).</br></br>
 
-        Весь REST интерфейс покрывается JUnit тестами, используя Spring MVC Test и Spring Security Test.
+        Весь REST интерфейс покрывается JUnit тестами, используя Spring MVC Test и Spring Security Test.</br>
         REST доступен:</br>
-        User: user@yandex.ru', Password: password</br>
+        User: user@yandex.ru , Password: password</br>
         Couple URL(method Get):</br>
-        <a href="http://simonov-topj.herokuapp.com/rest/profile">Profile</a>
-        <a href="http://simonov-topj.herokuapp.com/rest/profile/meals">All meals</a>
+        <a href="http://simonov-topj.herokuapp.com/rest/profile">Profile</a>,
+        <a href="http://simonov-topj.herokuapp.com/rest/profile/meals">All meals</a>,
         ets...
     </div>
 </div>
