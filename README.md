@@ -3,6 +3,6 @@
 [![Dependency Status](https://dependencyci.com/github/JavaWebinar/topjava09/badge)](https://dependencyci.com/github/JavaWebinar/topjava09)
 
 
-===============================
+
 
 Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery + plugins.
